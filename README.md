@@ -5,3 +5,4 @@ ChallengeMe is an App that will challenge your knowledge in many different categ
 Dive right in and explore the vast knowledge of the world!
 
 The final project for CS 270, by Mohammad, Ayham, Kacem.
+<!-- Mohammad merge test -->
