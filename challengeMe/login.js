@@ -1,8 +1,11 @@
 import { View, TextInput, TouchableOpacity, Button, StyleSheet, Text } from 'react-native';
 import React, { useState } from 'react';
 
-const [username, setUsername] = useState('');
-const [password, setPassword] = useState('');
+export default function LoginPage(){
+  //ADDED THE USESTATE CODE INSIDE.
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
 
   const handleLogin = () => {
     // redirection after Loging in
@@ -15,7 +18,6 @@ const [password, setPassword] = useState('');
     console.log('Navigate to sign up page');
   };
 
-export default function LoginPage(){
 
   return (
     <View style={styles.container}>
