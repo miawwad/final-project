@@ -2,9 +2,10 @@ import { View, TextInput, TouchableOpacity, Button, StyleSheet, Text } from 'rea
 import React, { useState } from 'react';
 
 export default function LoginPage(){
-
+  //ADDED THE USESTATE CODE INSIDE.
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
 
   const handleLogin = () => {
     // redirection after Loging in
