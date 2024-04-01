@@ -49,3 +49,53 @@ export default function LoginPage(){
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 0.75,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  button: {
+    backgroundColor: '#2ea44f',
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginVertical: 10,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  
+  input: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  signUpText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 13,
+  },
+  WelcomeText: {
+    color: 'pink',
+    fontSize: 35,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+  Welcome1Text: {
+    color: '#4fre60',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 50,
+  },
+});
