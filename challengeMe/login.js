@@ -6,11 +6,18 @@ export default function LoginPage(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const defaultUserName = 'Ayham';
+  const defaultPassword = 'Ayham123';
+
 
   const handleLogin = () => {
     // redirection after Loging in
     console.log('Username:', username);
     console.log('Password:', password);
+
+    if ((username !== defaultUserName) || (password !== defaultPassword)){
+      console.log(`You don't have an account. Please Create One!`);
+    }
   };
 
   const handleSignUp = () => {
@@ -93,7 +100,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   Welcome1Text: {
-    color: '#4fre60',
+    // color: '#4fre60', The renderer could not recongnize it, so I replaced it with random color.
+    color: '#1f4e60',
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 50,
