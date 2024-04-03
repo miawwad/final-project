@@ -6,8 +6,8 @@ export default function LoginPage(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const defaultUserName = 'Ayham';
-  const defaultPassword = 'Ayham123';
+  const defaultUserNameUsedToCheckIfExisted = 'Ayham';
+  const defaultPasswordUsedToCheckIfExisted = 'Ayham123';
 
 
   const handleLogin = () => {
@@ -15,7 +15,7 @@ export default function LoginPage(){
     console.log('Username:', username);
     console.log('Password:', password);
 
-    if ((username !== defaultUserName) || (password !== defaultPassword)){
+    if ((username !== defaultUserNameUsedToCheckIfExisted) || (password !== defaultPasswordUsedToCheckIfExisted)){
       console.log(`You don't have an account. Please Create One!`);
     }
   };
