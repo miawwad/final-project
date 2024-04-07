@@ -6,11 +6,11 @@ export default function LoginPage(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const defaultUserNameUsedToCheckIfExisted = 'Ayham';
-  const defaultPasswordUsedToCheckIfExisted = 'Ayham123';
+  const defaultUserNameUsedToCheckIfExisted = 'Ayham'; // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes. 
+  const defaultPasswordUsedToCheckIfExisted = 'Ayham123'; // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes.
 
 
-  const checkUserNameAndPassword = () => {
+  const checkUserNameAndPassword = () => { // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes.
     // redirection after Loging in
     console.log('Username:', username);
     console.log('Password:', password);
