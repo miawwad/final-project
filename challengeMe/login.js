@@ -10,7 +10,7 @@ export default function LoginPage(){
   const defaultPasswordUsedToCheckIfExisted = 'Ayham123';
 
 
-  const handleLogin = () => {
+  const checkUserNameAndPassword = () => {
     // redirection after Loging in
     console.log('Username:', username);
     console.log('Password:', password);
@@ -45,7 +45,7 @@ export default function LoginPage(){
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
+      <TouchableOpacity onPress={checkUserNameAndPassword} style={styles.button}>
         <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <Text  style={styles.signUpText}> Don't have an account? </Text>
