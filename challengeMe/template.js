@@ -60,7 +60,7 @@ const App = () => {
   }, [quizData]);
 
   const handleOptionSelect = (index) => {
-    // Handle option selection
+    //Redundent
     setSelectedAnswer(index);
 
     const isCorrect = index === quizData[currentQuestion].answer;
@@ -74,7 +74,7 @@ const App = () => {
   };
 
   const handleNextQuestion = () => {
-    // Handle moving to the next question
+    //Redundent
     if (selectedAnswer !== null) {
       const isCorrect = selectedAnswer === quizData[currentQuestion].answer;
       setScore(score + (isCorrect ? 1 : 0));
@@ -84,7 +84,7 @@ const App = () => {
   };
 
   const handleCategoryChange = (newCategory) => {
-    // Handle category change
+    // Redundent
     setCategory(newCategory);
     const filteredData = questions.filter(
       (q) => newCategory === 'All' || q.category === newCategory
@@ -95,7 +95,7 @@ const App = () => {
   };
 
   const handleDifficultyChange = (newDifficulty) => {
-    // Handle difficulty change
+    // Redundent
     setDifficulty(newDifficulty);
     const filteredData = questions.filter(
       (q) => newDifficulty === 'All' || q.difficulty === newDifficulty
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     padding: 15,
     borderRadius: 20,
-    width: '60%', // Adjust width as needed
+    width: '60%', 
     alignItems: 'center',
   },
   homeButtonText: {

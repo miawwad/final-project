@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-// Import LogIn Page
+// redundent
 import LoginPage from './login.js';
 
 export default function App() {
@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // Just edited the style.
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    // commented-out code
   },
 });
