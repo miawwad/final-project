@@ -2,7 +2,7 @@ import { View, TextInput, TouchableOpacity, Button, StyleSheet, Text } from 'rea
 import React, { useState } from 'react';
 
 export default function LoginPage(){
-  //ADDED THE USESTATE CODE INSIDE.
+  //Obsolete (old)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   Welcome1Text: {
-    // color: '#4fre60', The renderer could not recongnize it, so I replaced it with random color.
+   //commented-out code
     color: '#1f4e60',
     fontSize: 18,
     fontWeight: 'bold',
