@@ -6,17 +6,17 @@ export default function LoginPage(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const defaultUserName = 'Ayham';
-  const defaultPassword = 'Ayham123';
+  const defaultUserNameUsedToCheckIfExisted = 'Ayham'; // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes. 
+  const defaultPasswordUsedToCheckIfExisted = 'Ayham123'; // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes.
 
 
-  const handleLogin = () => {
+  const checkUserNameAndPassword = () => { // N1: Choose Descriptive names & N5: Use Long Names for Long Scopes.
     // redirection after Loging in
     console.log('Username:', username);
     console.log('Password:', password);
 
-    if ((username !== defaultUserName) || (password !== defaultPassword)){
-      console.log(`You don't have an account. Please Create One!`);
+    if ((username !== defaultUserNameUsedToCheckIfExisted) || (password !== defaultPasswordUsedToCheckIfExisted)){
+      console.log(`You don't have an account. Please Create One!`); // console log the message // C4: POORLY WRITTEN COMMENT 
     }
   };
 
@@ -45,7 +45,7 @@ export default function LoginPage(){
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
+      <TouchableOpacity onPress={checkUserNameAndPassword} style={styles.button}>
         <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <Text  style={styles.signUpText}> Don't have an account? </Text>
