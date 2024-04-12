@@ -16,7 +16,7 @@ export default function LoginPage(){
     console.log('Password:', password);
 
     if ((username !== defaultUserNameUsedToCheckIfExisted) || (password !== defaultPasswordUsedToCheckIfExisted)){
-      console.log(`You don't have an account. Please Create One!`);
+      console.log(`You don't have an account. Please Create One!`); // console log the message // C4: POORLY WRITTEN COMMENT 
     }
   };
 
