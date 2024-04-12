@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 
 export default function LoginPage(){
   //ADDED THE USESTATE CODE INSIDE.
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(''); //descriptive names
+  const [password, setPassword] = useState(''); // descriptive names
 
-  const defaultUserName = 'Ayham';
-  const defaultPassword = 'Ayham123';
+  const CodeTestingDefaultUserName = 'Ayham'; //Names should describe side-effects clearly
+  const CodeTestingDefaultPassword = 'Ayham123';
 
 
   const handleLogin = () => {
@@ -15,12 +15,12 @@ export default function LoginPage(){
     console.log('Username:', username);
     console.log('Password:', password);
 
-    if ((username !== defaultUserName) || (password !== defaultPassword)){
+    if ((username !== CodeTestingDefaultUserName) || (password !== CodeTestingDefaultPassword)){
       console.log(`You don't have an account. Please Create One!`);
     }
   };
 
-  const handleSignUp = () => {
+  const handleSignUpToPage = () => { //appropriate level of abstraction
     // redirection to the Sign up page
     console.log('Navigate to sign up page');
   };
@@ -49,7 +49,7 @@ export default function LoginPage(){
         <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <Text  style={styles.signUpText}> Don't have an account? </Text>
-        <TouchableOpacity onPress={handleSignUp} style={styles.button} >
+        <TouchableOpacity onPress={handleSignUpToPage} style={styles.button} >
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
     
