@@ -17,7 +17,7 @@ const categories = Object.keys(categoryIcons);
 
 const MainScreen = ({ navigation }) => {
   return (
-    <p>hI,....</p>// This is just a template.  
+    <p>hI,....</p> // This is just a template :) 
   );
 };
 
