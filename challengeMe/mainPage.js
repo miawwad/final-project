@@ -17,7 +17,23 @@ const categories = Object.keys(categoryIcons);
 
 const MainScreen = ({ navigation }) => {
   return (
-    <p>hI,....</p> // This is just a template :) 
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
+          <Text style={styles.title}>ChallengeMe</Text>
+          <Image
+            style={styles.image}
+            source={{uri: 'https://source.unsplash.com/random/800x600?q=quiz'}}
+          />
+          {categories.map((category, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.button}
+              onPress={() => navigation.navigate(${category}Screen)}
+            >
+              <Icon name={categoryIcons[category]} size={24} color="white" style={styles.icon} />
+              <Text style={styles.buttonText}>{category}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView> 
   );
 };
 
