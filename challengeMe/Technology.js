@@ -1,4 +1,8 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const APP_STORAGE_KEY = 'quizData';
 
 const questions = [
     {
