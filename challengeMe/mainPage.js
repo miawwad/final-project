@@ -27,7 +27,7 @@ const MainScreen = ({ navigation }) => {
             <TouchableOpacity
               key={index}
               style={styles.button}
-              onPress={() => navigation.navigate(${category}Screen)}
+              onPress={() => navigation.navigate(`${category}Screen`)}
             >
               <Icon name={categoryIcons[category]} size={24} color="white" style={styles.icon} />
               <Text style={styles.buttonText}>{category}</Text>
