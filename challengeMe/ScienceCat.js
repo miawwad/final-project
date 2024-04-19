@@ -2,232 +2,161 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const APP_STORAGE_KEY = "LiteratureQuizData";
+const APP_STORAGE_KEY = "ScienceQuizData";
 
+// Hi
 const questions = [
   {
-    category: "Lit",
+    category: "Science",
     difficulty: "Easy",
-    question: 'Who wrote "Pride and Prejudice"?',
+    question: "What is the chemical symbol for water?",
+    options: ["H2O", "CO2", "NaCl", "O2"],
+    answer: 0, // Index of the correct answer in options array (H2O)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the closest planet to the Sun?",
+    options: ["Earth", "Mars", "Venus", "Mercury"],
+    answer: 3, // Index of the correct answer in options array (Mercury)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the largest organ in the human body?",
+    options: ["Brain", "Liver", "Heart", "Skin"],
+    answer: 3, // Index of the correct answer in options array (Skin)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the process by which plants make their own food?",
+    options: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+    answer: 1, // Index of the correct answer in options array (Photosynthesis)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for gold?",
+    options: ["Ag", "Au", "Fe", "Cu"],
+    answer: 1, // Index of the correct answer in options array (Au)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "Which gas do plants use for photosynthesis?",
+    options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+    answer: 0, // Index of the correct answer in options array (Carbon dioxide)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the force that causes objects to fall to the ground?",
+    options: ["Magnetism", "Gravity", "Friction", "Buoyancy"],
+    answer: 1, // Index of the correct answer in options array (Gravity)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for oxygen?",
+    options: ["O2", "O3", "H2O", "CO2"],
+    answer: 0, // Index of the correct answer in options array (O2)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the process by which liquid water becomes water vapor?",
+    options: ["Condensation", "Evaporation", "Sublimation", "Precipitation"],
+    answer: 1, // Index of the correct answer in options array (Evaporation)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the largest planet in our solar system?",
+    options: ["Mars", "Jupiter", "Saturn", "Neptune"],
+    answer: 1, // Index of the correct answer in options array (Jupiter)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the study of living organisms called?",
+    options: ["Physics", "Chemistry", "Biology", "Geology"],
+    answer: 2, // Index of the correct answer in options array (Biology)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for carbon dioxide?",
+    options: ["CO2", "O2", "H2O", "N2"],
+    answer: 0, // Index of the correct answer in options array (CO2)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the powerhouse of the cell?",
     options: [
-      "Charlotte Brontë",
-      "Emily Brontë",
-      "Jane Austen",
-      "Mary Shelley",
+      "Nucleus",
+      "Mitochondria",
+      "Cell membrane",
+      "Endoplasmic reticulum",
     ],
-    answer: 2, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Mitochondria)
   },
   {
-    category: "Lit",
+    category: "Science",
     difficulty: "Easy",
-    question: 'What is the main theme of "1984" by George Orwell?',
-    options: ["Romance", "Adventure", "Totalitarianism", "Comedy"],
-    answer: 2, // Index of the correct answer in options array
+    question: "What is the study of Earth's atmosphere called?",
+    options: ["Meteorology", "Geology", "Astronomy", "Ecology"],
+    answer: 0, // Index of the correct answer in options array (Meteorology)
   },
   {
-    category: "Lit",
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for sodium chloride?",
+    options: ["NaCl", "KCl", "HCl", "MgCl2"],
+    answer: 0, // Index of the correct answer in options array (NaCl)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the smallest unit of matter?",
+    options: ["Atom", "Molecule", "Cell", "Nucleus"],
+    answer: 0, // Index of the correct answer in options array (Atom)
+  },
+  {
+    category: "Science",
     difficulty: "Easy",
     question:
-      "Which Shakespeare play features the characters Rosalind and Orlando?",
-    options: ["As You Like It", "The Tempest", "Romeo and Juliet", "Macbeth"],
-    answer: 0, // Index of the correct answer in options array
+      "What is the branch of science that deals with the study of rocks?",
+    options: ["Geology", "Meteorology", "Astronomy", "Biology"],
+    answer: 0, // Index of the correct answer in options array (Geology)
   },
   {
-    category: "Lit",
+    category: "Science",
     difficulty: "Easy",
     question:
-      'What novel is the source of the quote, "All animals are equal, but some animals are more equal than others"?',
-    options: [
-      "The Jungle Book",
-      "Animal Farm",
-      "Watership Down",
-      "The Call of the Wild",
-    ],
-    answer: 1, // Index of the correct answer in options array
+      "What is the process by which plants release water vapor through their leaves?",
+    options: ["Transpiration", "Photosynthesis", "Evaporation", "Respiration"],
+    answer: 0, // Index of the correct answer in options array (Transpiration)
   },
   {
-    category: "Lit",
+    category: "Science",
     difficulty: "Easy",
-    question: 'Who wrote "The Great Gatsby"?',
-    options: [
-      "F. Scott Fitzgerald",
-      "Ernest Hemingway",
-      "John Steinbeck",
-      "William Faulkner",
-    ],
-    answer: 0, // Index of the correct answer in options array
+    question: "What is the chemical symbol for helium?",
+    options: ["He", "H", "Li", "Ne"],
+    answer: 0, // Index of the correct answer in options array (He)
   },
   {
-    category: "Lit",
-    difficulty: "Easy",
-    question: '"The Catcher in the Rye" is a novel by which author?',
-    options: ["J.D. Salinger", "Harper Lee", "Kurt Vonnegut", "Stephen King"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
+    category: "Science",
     difficulty: "Easy",
     question:
-      'Which book begins with the line, "It was the best of times, it was the worst of times"?',
-    options: [
-      "War and Peace",
-      "A Tale of Two Cities",
-      "Great Expectations",
-      "Les Misérables",
-    ],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Moby-Dick"?',
-    options: [
-      "Herman Melville",
-      "Nathaniel Hawthorne",
-      "Mark Twain",
-      "Henry James",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which novel features the character Atticus Finch?",
-    options: [
-      "To Kill a Mockingbird",
-      "The Scarlet Letter",
-      "East of Eden",
-      "Catch-22",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question:
-      '"One Hundred Years of Solitude" is a book written by which author?',
-    options: [
-      "Gabriel García Márquez",
-      "Mario Vargas Llosa",
-      " Julio Cortázar",
-      "Jorge Luis Borges",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote the poem "The Raven"?',
-    options: [
-      "Edgar Allan Poe",
-      "Walt Whitman",
-      "Emily Dickinson",
-      "Robert Frost",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which novel did Alice Walker write?",
-    options: [
-      "The Color Purple",
-      "Beloved",
-      "The Bluest Eye",
-      "Their Eyes Were Watching God",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question:
-      'What is the name of the fictional land where "The Lord of the Rings" is set?',
-    options: ["Narnia", "Westeros", "Middle-earth", "Earthsea"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Brave New World"?',
-    options: [
-      "George Orwell",
-      "Aldous Huxley",
-      "Philip K. Dick",
-      "Isaac Asimov",
-    ],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'What is the primary genre of "Frankenstein" by Mary Shelley?',
-    options: [
-      "Romance",
-      "Science Fiction",
-      "Gothic Horror",
-      "Historical Fiction",
-    ],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Which poet wrote "Do not go gentle into that good night"?',
-    options: [" Dylan Thomas", "T.S. Eliot", "Robert Frost", "Langston Hughes"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who is the author of "Les Misérables"?',
-    options: [
-      "Victor Hugo",
-      "Alexandre Dumas",
-      "Gustave Flaubert",
-      "Honoré de Balzac",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: '"Invisible Man" is a novel by which author?',
-    options: [
-      "Ralph Ellison",
-      "Richard Wright",
-      "James Baldwin",
-      "Langston Hughes",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Love in the Time of Cholera"?',
-    options: [
-      "Isabel Allende",
-      "Gabriel García Márquez",
-      "Carlos Fuentes",
-      "Pablo Neruda",
-    ],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which work is a famous play by Tennessee Williams?",
-    options: [
-      "The Glass Menagerie",
-      "Death of a Salesman",
-      "Long Da's Journey Into Night",
-      "The Crucible",
-    ],
-    answer: 0, // Index of the correct answer in options array
+      "What is the process by which plants absorb water through their roots?",
+    options: ["Photosynthesis", "Transpiration", "Respiration", "Osmosis"],
+    answer: 3,
   },
 ];
 
-const LiteratureCat = () => {
+const ScienceCat = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
@@ -427,4 +356,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LiteratureCat;
+export default ScienceCat;

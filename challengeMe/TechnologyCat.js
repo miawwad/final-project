@@ -2,232 +2,190 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const APP_STORAGE_KEY = "LiteratureQuizData";
+const APP_STORAGE_KEY = "TechnologyQuizData";
 
 const questions = [
   {
-    category: "Lit",
+    category: "Technology",
+    difficulty: "Medium",
+    question: "Who is the CEO of Tesla, Inc.?",
+    options: ["Jeff Bezos", "Elon Musk", "Tim Cook", "Mark Zuckerberg"],
+    answer: 1, // Index of the correct answer in options array (Elon Musk)
+  },
+  {
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who wrote "Pride and Prejudice"?',
+    question: 'What does "CPU" stand for in computing?',
     options: [
-      "Charlotte Brontë",
-      "Emily Brontë",
-      "Jane Austen",
-      "Mary Shelley",
+      "Central Processing Unit",
+      "Computer Processing Unit",
+      "Core Processing Unit",
+      "Central Power Unit",
     ],
-    answer: 2, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (Central Processing Unit)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'What is the main theme of "1984" by George Orwell?',
-    options: ["Romance", "Adventure", "Totalitarianism", "Comedy"],
-    answer: 2, // Index of the correct answer in options array
+    question: "Which company developed the Android operating system?",
+    options: ["Apple", "Google", "Microsoft", "Samsung"],
+    answer: 1, // Index of the correct answer in options array (Google)
   },
   {
-    category: "Lit",
+    category: "Technology",
+    difficulty: "Easy",
+    question: "What is the primary function of a router in a computer network?",
+    options: [
+      "Filtering spam emails",
+      "Providing internet access",
+      "Displaying web pages",
+      "Connecting multiple devices",
+    ],
+    answer: 3, // Index of the correct answer in options array (Connecting multiple devices)
+  },
+  {
+    category: "Technology",
     difficulty: "Easy",
     question:
-      "Which Shakespeare play features the characters Rosalind and Orlando?",
-    options: ["As You Like It", "The Tempest", "Romeo and Juliet", "Macbeth"],
-    answer: 0, // Index of the correct answer in options array
+      "Which programming language is commonly used for web development?",
+    options: ["Java", "C++", "Python", "JavaScript"],
+    answer: 3, // Index of the correct answer in options array (JavaScript)
   },
   {
-    category: "Lit",
+    category: "Technology",
+    difficulty: "Easy",
+    question: 'What does "URL" stand for in web technology?',
+    options: [
+      "Universal Resource Locator",
+      "Uniform Resource Locator",
+      "Universal Reference Locator",
+      "Uniform Reference Locator",
+    ],
+    answer: 1, // Index of the correct answer in options array (Uniform Resource Locator)
+  },
+  {
+    category: "Technology",
+    difficulty: "Easy",
+    question: "Which company developed the Windows operating system?",
+    options: ["Apple", "Google", "Microsoft", "Samsung"],
+    answer: 2, // Index of the correct answer in options array (Microsoft)
+  },
+  {
+    category: "Technology",
     difficulty: "Easy",
     question:
-      'What novel is the source of the quote, "All animals are equal, but some animals are more equal than others"?',
-    options: [
-      "The Jungle Book",
-      "Animal Farm",
-      "Watership Down",
-      "The Call of the Wild",
-    ],
-    answer: 1, // Index of the correct answer in options array
+      "What is the standard protocol used for secure communication over the internet?",
+    options: ["HTTP", "SMTP", "FTP", "HTTPS"],
+    answer: 3, // Index of the correct answer in options array (HTTPS)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who wrote "The Great Gatsby"?',
-    options: [
-      "F. Scott Fitzgerald",
-      "Ernest Hemingway",
-      "John Steinbeck",
-      "William Faulkner",
-    ],
-    answer: 0, // Index of the correct answer in options array
+    question: "What is the name of the virtual assistant developed by Amazon?",
+    options: ["Google Assistant", "Siri", "Cortana", "Alexa"],
+    answer: 3, // Index of the correct answer in options array (Alexa)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: '"The Catcher in the Rye" is a novel by which author?',
-    options: ["J.D. Salinger", "Harper Lee", "Kurt Vonnegut", "Stephen King"],
-    answer: 0, // Index of the correct answer in options array
+    question: 'What does "HTML" stand for in web development?',
+    options: [
+      "Hyperlinks and Text Markup Language",
+      "Hyper Text Markup Language",
+      "Home Tool Markup Language",
+      "Hyper Text Makeup Language",
+    ],
+    answer: 1, // Index of the correct answer in options array (Hyper Text Markup Language)
   },
   {
-    category: "Lit",
+    category: "Technology",
+    difficulty: "Easy",
+    question: "Which company developed the iPhone?",
+    options: ["Apple", "Google", "Microsoft", "Samsung"],
+    answer: 0, // Index of the correct answer in options array (Apple)
+  },
+  {
+    category: "Technology",
     difficulty: "Easy",
     question:
-      'Which book begins with the line, "It was the best of times, it was the worst of times"?',
-    options: [
-      "War and Peace",
-      "A Tale of Two Cities",
-      "Great Expectations",
-      "Les Misérables",
-    ],
-    answer: 1, // Index of the correct answer in options array
+      "What is the term used for a small piece of code that is able to run within a larger program?",
+    options: ["Microprocessor", "Subroutine", "Script", "Algorithm"],
+    answer: 1, // Index of the correct answer in options array (Subroutine)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who wrote "Moby-Dick"?',
-    options: [
-      "Herman Melville",
-      "Nathaniel Hawthorne",
-      "Mark Twain",
-      "Henry James",
-    ],
-    answer: 0, // Index of the correct answer in options array
+    question: "Which company developed the macOS operating system?",
+    options: ["Apple", "Google", "Microsoft", "Samsung"],
+    answer: 0, // Index of the correct answer in options array (Apple)
   },
   {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which novel features the character Atticus Finch?",
-    options: [
-      "To Kill a Mockingbird",
-      "The Scarlet Letter",
-      "East of Eden",
-      "Catch-22",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
     question:
-      '"One Hundred Years of Solitude" is a book written by which author?',
-    options: [
-      "Gabriel García Márquez",
-      "Mario Vargas Llosa",
-      " Julio Cortázar",
-      "Jorge Luis Borges",
-    ],
-    answer: 0, // Index of the correct answer in options array
+      "What is the term used to describe a program that replicates itself and spreads to other computers?",
+    options: ["Virus", "Malware", "Spyware", "Phishing"],
+    answer: 0, // Index of the correct answer in options array (Virus)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who wrote the poem "The Raven"?',
+    question: 'What does "WWW" stand for in web addresses?',
     options: [
-      "Edgar Allan Poe",
-      "Walt Whitman",
-      "Emily Dickinson",
-      "Robert Frost",
+      "World Wide Web",
+      "Web World Wide",
+      "Wide Web World",
+      "World Web Wide",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (World Wide Web)
   },
   {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which novel did Alice Walker write?",
-    options: [
-      "The Color Purple",
-      "Beloved",
-      "The Bluest Eye",
-      "Their Eyes Were Watching God",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
     question:
-      'What is the name of the fictional land where "The Lord of the Rings" is set?',
-    options: ["Narnia", "Westeros", "Middle-earth", "Earthsea"],
-    answer: 2, // Index of the correct answer in options array
+      "What is the term used for a software program that displays web pages?",
+    options: ["Browser", "Search Engine", "Server", "Firewall"],
+    answer: 0, // Index of the correct answer in options array (Browser)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who wrote "Brave New World"?',
+    question: 'What does "LAN" stand for in computer networking?',
     options: [
-      "George Orwell",
-      "Aldous Huxley",
-      "Philip K. Dick",
-      "Isaac Asimov",
+      "Local Area Network",
+      "Large Area Network",
+      "Longshot Area Network",
+      "Language Access Network",
     ],
-    answer: 1, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (Local Area Network)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'What is the primary genre of "Frankenstein" by Mary Shelley?',
-    options: [
-      "Romance",
-      "Science Fiction",
-      "Gothic Horror",
-      "Historical Fiction",
-    ],
-    answer: 2, // Index of the correct answer in options array
+    question:
+      "What is the term used for a device that connects multiple computers together in a network?",
+    options: ["Modem", "Router", "Switch", "Hub"],
+    answer: 2, // Index of the correct answer in options array (Switch)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Which poet wrote "Do not go gentle into that good night"?',
-    options: [" Dylan Thomas", "T.S. Eliot", "Robert Frost", "Langston Hughes"],
-    answer: 0, // Index of the correct answer in options array
+    question:
+      "Which programming language is commonly used for creating mobile applications?",
+    options: ["Java", "C++", "Python", "Swift"],
+    answer: 3, // Index of the correct answer in options array (Swift)
   },
   {
-    category: "Lit",
+    category: "Technology",
     difficulty: "Easy",
-    question: 'Who is the author of "Les Misérables"?',
-    options: [
-      "Victor Hugo",
-      "Alexandre Dumas",
-      "Gustave Flaubert",
-      "Honoré de Balzac",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: '"Invisible Man" is a novel by which author?',
-    options: [
-      "Ralph Ellison",
-      "Richard Wright",
-      "James Baldwin",
-      "Langston Hughes",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Love in the Time of Cholera"?',
-    options: [
-      "Isabel Allende",
-      "Gabriel García Márquez",
-      "Carlos Fuentes",
-      "Pablo Neruda",
-    ],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which work is a famous play by Tennessee Williams?",
-    options: [
-      "The Glass Menagerie",
-      "Death of a Salesman",
-      "Long Da's Journey Into Night",
-      "The Crucible",
-    ],
-    answer: 0, // Index of the correct answer in options array
+    question:
+      "What is the term used for a type of malware that encrypts files and demands payment for their release?",
+    options: ["Virus", "Spyware", "Ransomware", "Trojan Horse"],
+    answer: 2, // Index of the correct answer in options array (Ransomware)
   },
 ];
 
-const LiteratureCat = () => {
+const TechnologyCat = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
@@ -427,4 +385,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LiteratureCat;
+export default TechnologyCat;

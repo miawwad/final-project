@@ -2,232 +2,219 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const APP_STORAGE_KEY = "LiteratureQuizData";
+const APP_STORAGE_KEY = "MoviesQuizData";
 
 const questions = [
   {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Pride and Prejudice"?',
+    category: "Movies",
+    difficulty: "Medium",
+    question: 'Who directed the movie "Inception" (2010)?',
     options: [
-      "Charlotte Brontë",
-      "Emily Brontë",
-      "Jane Austen",
-      "Mary Shelley",
+      "Christopher Nolan",
+      "Quentin Tarantino",
+      "Steven Spielberg",
+      "Martin Scorsese",
     ],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'What is the main theme of "1984" by George Orwell?',
-    options: ["Romance", "Adventure", "Totalitarianism", "Comedy"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question:
-      "Which Shakespeare play features the characters Rosalind and Orlando?",
-    options: ["As You Like It", "The Tempest", "Romeo and Juliet", "Macbeth"],
     answer: 0, // Index of the correct answer in options array
   },
   {
-    category: "Lit",
+    category: "Movies",
+    difficulty: "Easy",
+    question: "Which movie won the Academy Award for Best Picture in 2019?",
+    options: ["La La Land", "The Shape of Water", "Green Book", "Moonlight"],
+    answer: 2,
+  },
+  {
+    category: "Movies",
     difficulty: "Easy",
     question:
-      'What novel is the source of the quote, "All animals are equal, but some animals are more equal than others"?',
+      'Which actor played the lead role in the movie "The Godfather" (1972)?',
+    options: ["Al Pacino", "Marlon Brando", "Robert De Niro", "Jack Nicholson"],
+    answer: 1, // Index of the correct answer in options array (Marlon Brando)
+  },
+  {
+    category: "Movies",
+    difficulty: "Easy",
+    question:
+      'In the film "Forrest Gump" (1994), what is Forrest\'s favorite saying?',
     options: [
-      "The Jungle Book",
+      '"Life is like a box of chocolates, you never know what you\'re gonna get."',
+      '"Just keep swimming."',
+      '"Here\'s looking at you, kid."',
+      '"May the Force be with you."',
+    ],
+    answer: 0, // Index of the correct answer in options array ("Life is like a box of chocolates, you never know what you're gonna get.")
+  },
+  {
+    category: "Movies",
+    difficulty: "Easy",
+    question: 'Who played the iconic character of Neo in "The Matrix" (1999)?',
+    options: ["Keanu Reeves", "Tom Cruise", "Will Smith", "Brad Pitt"],
+    answer: 0, // Index of the correct answer in options array (Keanu Reeves)
+  },
+  {
+    category: "Movies",
+    difficulty: "Easy",
+    question: "Which movie features a talking pig named Babe?",
+    options: [
+      "Charlotte's Web",
+      "Babe",
       "Animal Farm",
-      "Watership Down",
-      "The Call of the Wild",
+      "The Secret Life of Pets",
     ],
-    answer: 1, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Babe)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'Who wrote "The Great Gatsby"?',
+    question: 'Who directed the movie "Jurassic Park" (1993)?',
     options: [
-      "F. Scott Fitzgerald",
-      "Ernest Hemingway",
-      "John Steinbeck",
-      "William Faulkner",
+      "James Cameron",
+      "Steven Spielberg",
+      "George Lucas",
+      "Ridley Scott",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Steven Spielberg)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: '"The Catcher in the Rye" is a novel by which author?',
-    options: ["J.D. Salinger", "Harper Lee", "Kurt Vonnegut", "Stephen King"],
-    answer: 0, // Index of the correct answer in options array
+    question: 'Which Disney movie features the song "Let It Go"?',
+    options: ["Aladdin", "Beauty and the Beast", "Frozen", "The Lion King"],
+    answer: 2, // Index of the correct answer in options array (Frozen)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
     question:
-      'Which book begins with the line, "It was the best of times, it was the worst of times"?',
-    options: [
-      "War and Peace",
-      "A Tale of Two Cities",
-      "Great Expectations",
-      "Les Misérables",
-    ],
-    answer: 1, // Index of the correct answer in options array
+      'Who played the role of Jack Dawson in the movie "Titanic" (1997)?',
+    options: ["Leonardo DiCaprio", "Tom Hanks", "Johnny Depp", "Matt Damon"],
+    answer: 0, // Index of the correct answer in options array (Leonardo DiCaprio)
   },
   {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who wrote "Moby-Dick"?',
-    options: [
-      "Herman Melville",
-      "Nathaniel Hawthorne",
-      "Mark Twain",
-      "Henry James",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: "Which novel features the character Atticus Finch?",
-    options: [
-      "To Kill a Mockingbird",
-      "The Scarlet Letter",
-      "East of Eden",
-      "Catch-22",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
     question:
-      '"One Hundred Years of Solitude" is a book written by which author?',
+      "Which actor portrayed the character of Iron Man in the Marvel Cinematic Universe?",
     options: [
-      "Gabriel García Márquez",
-      "Mario Vargas Llosa",
-      " Julio Cortázar",
-      "Jorge Luis Borges",
+      "Chris Evans",
+      "Chris Hemsworth",
+      "Robert Downey Jr.",
+      "Mark Ruffalo",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 2, // Index of the correct answer in options array (Robert Downey Jr.)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'Who wrote the poem "The Raven"?',
+    question: 'Who directed the movie "Avatar" (2009)?',
     options: [
-      "Edgar Allan Poe",
-      "Walt Whitman",
-      "Emily Dickinson",
-      "Robert Frost",
+      "James Cameron",
+      "Peter Jackson",
+      "Christopher Nolan",
+      "George Lucas",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (James Cameron)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: "Which novel did Alice Walker write?",
+    question: "Which movie features the character of Harry Potter?",
     options: [
-      "The Color Purple",
-      "Beloved",
-      "The Bluest Eye",
-      "Their Eyes Were Watching God",
+      "The Lord of the Rings",
+      "Harry Potter and the Sorcerer's Stone",
+      "The Hunger Games",
+      "Twilight",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Harry Potter and the Sorcerer's Stone)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
     question:
-      'What is the name of the fictional land where "The Lord of the Rings" is set?',
-    options: ["Narnia", "Westeros", "Middle-earth", "Earthsea"],
-    answer: 2, // Index of the correct answer in options array
+      'What is the name of the lion in Disney\'s "The Lion King" (1994)?',
+    options: ["Simba", "Mufasa", "Scar", "Nala"],
+    answer: 0, // Index of the correct answer in options array (Simba)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'Who wrote "Brave New World"?',
+    question: "Which movie features a shark named Bruce?",
+    options: ["Jaws", "Finding Nemo", "Shark Tale", "Deep Blue Sea"],
+    answer: 1, // Index of the correct answer in options array (Finding Nemo)
+  },
+  {
+    category: "Movies",
+    difficulty: "Easy",
+    question:
+      'Who played the role of Hermione Granger in the "Harry Potter" film series?',
     options: [
-      "George Orwell",
-      "Aldous Huxley",
-      "Philip K. Dick",
-      "Isaac Asimov",
+      "Emma Watson",
+      "Daniel Radcliffe",
+      "Rupert Grint",
+      "Bonnie Wright",
     ],
-    answer: 1, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (Emma Watson)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'What is the primary genre of "Frankenstein" by Mary Shelley?',
+    question:
+      'Which movie features a character named "Ferris Bueller" skipping school?',
     options: [
-      "Romance",
-      "Science Fiction",
-      "Gothic Horror",
-      "Historical Fiction",
+      "The Breakfast Club",
+      "Ferris Bueller's Day Off",
+      "Sixteen Candles",
+      "Pretty in Pink",
     ],
-    answer: 2, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Ferris Bueller's Day Off)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'Which poet wrote "Do not go gentle into that good night"?',
-    options: [" Dylan Thomas", "T.S. Eliot", "Robert Frost", "Langston Hughes"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Lit",
-    difficulty: "Easy",
-    question: 'Who is the author of "Les Misérables"?',
+    question: 'Who directed the movie "The Shawshank Redemption" (1994)?',
     options: [
-      "Victor Hugo",
-      "Alexandre Dumas",
-      "Gustave Flaubert",
-      "Honoré de Balzac",
+      "David Fincher",
+      "Quentin Tarantino",
+      "Frank Darabont",
+      "Steven Spielberg",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 2, // Index of the correct answer in options array (Frank Darabont)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: '"Invisible Man" is a novel by which author?',
+    question: 'Which movie features a character named "E.T."?',
     options: [
-      "Ralph Ellison",
-      "Richard Wright",
-      "James Baldwin",
-      "Langston Hughes",
+      "Close Encounters of the Third Kind",
+      "Interstellar",
+      "E.T. the Extra-Terrestrial",
+      "Contact",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 2, // Index of the correct answer in options array (E.T. the Extra-Terrestrial)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: 'Who wrote "Love in the Time of Cholera"?',
-    options: [
-      "Isabel Allende",
-      "Gabriel García Márquez",
-      "Carlos Fuentes",
-      "Pablo Neruda",
-    ],
-    answer: 1, // Index of the correct answer in options array
+    question: 'Who directed the movie "The Dark Knight" (2008)?',
+    options: ["Christopher Nolan", "Tim Burton", "Zack Snyder", "Joss Whedon"],
+    answer: 0, // Index of the correct answer in options array (Christopher Nolan)
   },
   {
-    category: "Lit",
+    category: "Movies",
     difficulty: "Easy",
-    question: "Which work is a famous play by Tennessee Williams?",
+    question: "Which movie features the character of Captain Jack Sparrow?",
     options: [
-      "The Glass Menagerie",
-      "Death of a Salesman",
-      "Long Da's Journey Into Night",
-      "The Crucible",
+      "Pirates of the Caribbean: The Curse of the Black Pearl",
+      "The Princess Bride",
+      "Hook",
+      "The Goonies",
     ],
-    answer: 0, // Index of the correct answer in options array
+    answer: 0, // Index of the correct answer in options array (Pirates of the Caribbean: The Curse of the Black Pearl)
   },
 ];
 
-const LiteratureCat = () => {
+const MoviesCat = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
@@ -427,4 +414,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LiteratureCat;
+export default MoviesCat;
