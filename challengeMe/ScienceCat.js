@@ -2,183 +2,160 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const APP_STORAGE_KEY = "MusicQuizData";
+const APP_STORAGE_KEY = "ScienceQuizData";
 
 const questions = [
   {
-    category: "Music",
+    category: "Science",
     difficulty: "Easy",
-    question: "Who composed the 'Moonlight Sonata'?",
+    question: "What is the chemical symbol for water?",
+    options: ["H2O", "CO2", "NaCl", "O2"],
+    answer: 0, // Index of the correct answer in options array (H2O)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the closest planet to the Sun?",
+    options: ["Earth", "Mars", "Venus", "Mercury"],
+    answer: 3, // Index of the correct answer in options array (Mercury)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the largest organ in the human body?",
+    options: ["Brain", "Liver", "Heart", "Skin"],
+    answer: 3, // Index of the correct answer in options array (Skin)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the process by which plants make their own food?",
+    options: ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+    answer: 1, // Index of the correct answer in options array (Photosynthesis)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for gold?",
+    options: ["Ag", "Au", "Fe", "Cu"],
+    answer: 1, // Index of the correct answer in options array (Au)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "Which gas do plants use for photosynthesis?",
+    options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+    answer: 0, // Index of the correct answer in options array (Carbon dioxide)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the force that causes objects to fall to the ground?",
+    options: ["Magnetism", "Gravity", "Friction", "Buoyancy"],
+    answer: 1, // Index of the correct answer in options array (Gravity)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for oxygen?",
+    options: ["O2", "O3", "H2O", "CO2"],
+    answer: 0, // Index of the correct answer in options array (O2)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the process by which liquid water becomes water vapor?",
+    options: ["Condensation", "Evaporation", "Sublimation", "Precipitation"],
+    answer: 1, // Index of the correct answer in options array (Evaporation)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the largest planet in our solar system?",
+    options: ["Mars", "Jupiter", "Saturn", "Neptune"],
+    answer: 1, // Index of the correct answer in options array (Jupiter)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the study of living organisms called?",
+    options: ["Physics", "Chemistry", "Biology", "Geology"],
+    answer: 2, // Index of the correct answer in options array (Biology)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for carbon dioxide?",
+    options: ["CO2", "O2", "H2O", "N2"],
+    answer: 0, // Index of the correct answer in options array (CO2)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the powerhouse of the cell?",
     options: [
-      "Wolfgang Amadeus Mozart",
-      "Ludwig van Beethoven",
-      "Johann Sebastian Bach",
-      "Franz Schubert",
+      "Nucleus",
+      "Mitochondria",
+      "Cell membrane",
+      "Endoplasmic reticulum",
     ],
-    answer: 1, // Index of the correct answer in options array
+    answer: 1, // Index of the correct answer in options array (Mitochondria)
   },
   {
-    category: "Music",
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the study of Earth's atmosphere called?",
+    options: ["Meteorology", "Geology", "Astronomy", "Ecology"],
+    answer: 0, // Index of the correct answer in options array (Meteorology)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the chemical symbol for sodium chloride?",
+    options: ["NaCl", "KCl", "HCl", "MgCl2"],
+    answer: 0, // Index of the correct answer in options array (NaCl)
+  },
+  {
+    category: "Science",
+    difficulty: "Easy",
+    question: "What is the smallest unit of matter?",
+    options: ["Atom", "Molecule", "Cell", "Nucleus"],
+    answer: 0, // Index of the correct answer in options array (Atom)
+  },
+  {
+    category: "Science",
     difficulty: "Easy",
     question:
-      "Which instrument has six strings and is commonly used in rock music?",
-    options: ["Violin", "Piano", "Guitar", "Saxophone"],
-    answer: 2, // Index of the correct answer in options array
+      "What is the branch of science that deals with the study of rocks?",
+    options: ["Geology", "Meteorology", "Astronomy", "Biology"],
+    answer: 0, // Index of the correct answer in options array (Geology)
   },
   {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Who is known as the 'King of Pop'?",
-    options: ["Elvis Presley", "Michael Jackson", "Prince", "David Bowie"],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "In which city did jazz music originate?",
-    options: ["Chicago", "Detroit", "New Orleans", "New York City"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
+    category: "Science",
     difficulty: "Easy",
     question:
-      "What musical period is known for composers like Bach, Handel, and Vivaldi?",
-    options: ["Classical", "Romantic", "Baroque", "Modern"],
-    answer: 2, // Index of the correct answer in options array
+      "What is the process by which plants release water vapor through their leaves?",
+    options: ["Transpiration", "Photosynthesis", "Evaporation", "Respiration"],
+    answer: 0, // Index of the correct answer in options array (Transpiration)
   },
   {
-    category: "Music",
+    category: "Science",
     difficulty: "Easy",
-    question: "Which group released the album titled 'Abbey Road'?",
-    options: [
-      "The Rolling Stones",
-      "The Beatles",
-      "Led Zeppelin",
-      "Pink Floyd",
-    ],
-    answer: 1, // Index of the correct answer in options array
+    question: "What is the chemical symbol for helium?",
+    options: ["He", "H", "Li", "Ne"],
+    answer: 0, // Index of the correct answer in options array (He)
   },
   {
-    category: "Music",
-    difficulty: "Easy",
-    question: "What is the highest male voice type in opera?",
-    options: ["Bass", "Baritone", "Tenor", "Alto"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Which of these instruments is a woodwind?",
-    options: ["Trumpet", "Violin", "Flute", "Cello"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Who composed the music for 'The Nutcracker'?",
-    options: [
-      "Claude Debussy",
-      "Pyotr Ilyich Tchaikovsky",
-      "Sergei Prokofiev",
-      "Igor Stravinsky",
-    ],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
+    category: "Science",
     difficulty: "Easy",
     question:
-      "What is the term for a piece of music where a violin soloist plays with an orchestra?",
-    options: ["Sonata", "Concerto", "Symphony", "Opera"],
-    answer: 1, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Which artist is famous for the song 'Like a Rolling Stone'?",
-    options: ["Bob Dylan", "Bruce Springsteen", "Neil Young", "John Lennon"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question:
-      "What genre of music did The Supremes contribute to during the 1960s?",
-    options: ["Rock", "Jazz", "Pop", "Motown"],
-    answer: 3, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Who composed 'Four Seasons'?",
-    options: [
-      "Antonio Vivaldi",
-      "Johann Sebastian Bach",
-      "Wolfgang Amadeus Mozart",
-      "Ludwig van Beethoven",
-    ],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question:
-      "Which music festival is known for a famous performance by Jimi Hendrix in 1969?",
-    options: ["Lollapalooza", "Coachella", "Woodstock", "Glastonbury"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "What does the Italian musical term 'forte' mean?",
-    options: ["Slowly", "Quietly", "Loudly", "Quickly"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Who is credited with popularizing the solo electric guitar?",
-    options: ["Eric Clapton", "B.B. King", "Jimi Hendrix", "Chuck Berry"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "What type of dance music became popular in the 1970s?",
-    options: ["Disco", "Swing", "Rock", "Folk"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "Who was the lead singer of the band Queen?",
-    options: ["Freddie Mercury", "David Bowie", "Elton John", "Mick Jagger"],
-    answer: 0, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question: "What is the name of the scale used in traditional Indian music?",
-    options: ["Chromatic", "Pentatonic", "Raga", "Dorian"],
-    answer: 2, // Index of the correct answer in options array
-  },
-  {
-    category: "Music",
-    difficulty: "Easy",
-    question:
-      "Which composer is known for his Fifth Symphony and 'Ode to Joy'?",
-    options: [
-      "Johann Sebastian Bach",
-      "Ludwig van Beethoven",
-      "Franz Schubert",
-      "Wolfgang Amadeus Mozart",
-    ],
-    answer: 1, // Index of the correct answer in options array
+      "What is the process by which plants absorb water through their roots?",
+    options: ["Photosynthesis", "Transpiration", "Respiration", "Osmosis"],
+    answer: 3,
   },
 ];
 
-const MoviesCat = () => {
+const ScienceCat = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
@@ -378,4 +355,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoviesCat;
+export default ScienceCat;

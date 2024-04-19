@@ -1,57 +1,87 @@
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Adjusted to use @expo/vector-icons if necessary
+import React from "react";
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Image,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome"; // Adjusted to use @expo/vector-icons if necessary
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import GeographyCat from "./GeographyCat.js";
+import HistoryCat from "./HistoryCat.js";
+import MusicCat from "./MusicCat.js";
+import MoviesCat from "./MoviesCat.js";
+import ScienceCat from "./ScienceCat.js";
+import TechnologyCat from "./TechnologyCat.js";
+import SportsCat from "./SportsCat.js";
+import LiteratureCat from "./LiteratureCat.js";
 
 const categoryIcons = {
-  History: 'book',
-  Geography: 'globe',
-  Music: 'music',
-  Movies: 'film',
-  Science: 'flask',
-  Technology: 'laptop',
-  Sports: 'soccer-ball-o',
-  Literature: 'pencil',
+  History: "book",
+  Geography: "globe",
+  Music: "music",
+  Movies: "film",
+  Science: "flask",
+  Technology: "laptop",
+  Sports: "soccer-ball-o",
+  Literature: "pencil",
 };
 
 const categories = Object.keys(categoryIcons);
 
 const MainScreen = ({ navigation }) => {
   return (
-        <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
-          <Text style={styles.title}>ChallengeMe</Text>
-          <Image
-            style={styles.image}
-            source={{uri: 'https://source.unsplash.com/random/800x600?q=quiz'}}
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.container}
+    >
+      <Text style={styles.title}>ChallengeMe</Text>
+      <Image
+        style={styles.image}
+        //source={{ uri: "https://source.unsplash.com/random/800x600?q=quiz" }}
+      />
+      {categories.map((category, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate(`${category}Cat`);
+            console.log(category);
+            //console.log(navigation);
+          }} // Just Added backteck.
+        >
+          <Icon
+            name={categoryIcons[category]}
+            size={24}
+            color="white"
+            style={styles.icon}
           />
-          {categories.map((category, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.button}
-              onPress={() => navigation.navigate(${category}Screen)}
-            >
-              <Icon name={categoryIcons[category]} size={24} color="white" style={styles.icon} />
-              <Text style={styles.buttonText}>{category}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView> 
+          <Text style={styles.buttonText}>{category}</Text>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: "#F5FCFF",
   },
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingTop: 50, // Increased padding at the top
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#333",
     marginTop: 20,
     marginBottom: 20,
   },
@@ -62,13 +92,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    flexDirection: 'row',
-    backgroundColor: '#007AFF',
+    flexDirection: "row",
+    backgroundColor: "#007AFF",
     paddingVertical: 15,
     paddingHorizontal: 20,
     width: width - 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginVertical: 10,
     borderRadius: 10,
     shadowColor: "#000",
@@ -78,7 +108,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
     marginLeft: 10,
   },
