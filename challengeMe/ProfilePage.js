@@ -1,6 +1,6 @@
 // Import necessary modules
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet  } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 // Initial component setup with state
