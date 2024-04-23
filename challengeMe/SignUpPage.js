@@ -1,51 +1,41 @@
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  Button,
-  StyleSheet,
-  Text,
-} from "react-native";
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainScreen from "./mainPage.js";
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
 
-export default function LoginPage({ navigation }) {
-  //ADDED THE USESTATE CODE INSIDE.
+export default function SignUpPage({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const defaultUserName = "Ayham";
-  const defaultPassword = "Ayham123";
-
-  const redirectToMainPage = () => {
-    navigation.navigate("MainScreen");
-  };
-
-  const handleLogin = () => {
-    // redirection after Loging in
-    console.log("Username:", username);
-    console.log("Password:", password);
-
-    if (username !== defaultUserName || password !== defaultPassword) {
-      console.log(`You don't have an account. Please Create One!`);
-      // Should be: redirectToSignUpPage.
-    } else {
-      // If userName and Password Match.
-      redirectToMainPage();
-    }
-  };
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleSignUp = () => {
-    navigation.navigate("SignUpPage");
-    console.log("Navigate to sign up page");
+    console.log("Signing up");
+    // Sign-up logic to add later on
+  };
+
+  const handleLoginRedirect = () => {
+    navigation.navigate("LoginPage");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.WelcomeText}> Welcome Back To </Text>
-      <Text style={styles.Welcome1Text}> ChallengeME ! </Text>
+    
+    {/* Header */}
+      <Text style={styles.WelcomeText}>Sign Up for</Text>
+      <Text style={styles.Welcome1Text}>ChallengeME</Text>
+      
+    {/* Input fields */}
+      <TextInput
+        style={styles.input}
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
+      />
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -60,19 +50,23 @@ export default function LoginPage({ navigation }) {
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Log in</Text>
-      </TouchableOpacity>
-      <Text style={styles.signUpText}> Don't have an account? </Text>
+        {/* SignUp redirection */}
       <TouchableOpacity onPress={handleSignUp} style={styles.button}>
-        <Text style={styles.buttonText}>Sign up</Text>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+
+        {/* Login redirection */}
+      <Text style={styles.loginText}>Already have an account?</Text>
+      <TouchableOpacity onPress={handleLoginRedirect} style={styles.button}>
+        <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
-    flex: 0.75,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
@@ -92,7 +86,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-
   input: {
     width: "100%",
     height: 40,
@@ -102,7 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  signUpText: {
+  loginText: {
     fontSize: 14,
     fontWeight: "bold",
     marginTop: 13,
