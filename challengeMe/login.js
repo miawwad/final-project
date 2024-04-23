@@ -38,7 +38,7 @@ export default function LoginPage({ navigation }) {
   };
 
   const handleSignUp = () => {
-    // redirection to the Sign up page
+    navigation.navigate("SignUpPage");
     console.log("Navigate to sign up page");
   };
 
