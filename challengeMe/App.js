@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LoginPage from "./login.js";
 import MainScreen from "./mainPage.js";
+import SignUpPage from "./SignUp.js";
 import HistoryCat from "./HistoryCat.js";
 import GeographyCat from "./GeographyCat.js";
 import MusicCat from "./MusicCat.js";
@@ -20,11 +21,19 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LoginPage" component={LoginPage} />
+        <Stack.Screen 
+        name="LoginPage" 
+        component={LoginPage} 
+        />
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
           options={{ title: "Change Category" }}
+        />
+        <Stack.Screen
+          name="SignUpPage"
+          component={SignUpPage}
+          options={{ title: "Sign Up" }}
         />
         <Stack.Screen
           name="HistoryCat"
