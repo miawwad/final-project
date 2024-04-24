@@ -82,19 +82,20 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   scrollView: {
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
     backgroundColor: "#F5FCFF",
   },
   container: {
     alignItems: "center",
-    paddingTop: 50, // Increased padding at the top
+    paddingTop: 26, // Increased padding at the top
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
-    marginTop: 20,
-    marginBottom: 20,
+    
   },
   image: {
     width: width - 40,
@@ -126,15 +127,17 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
-  profileImageContainer: {
+  profileImageContainer: {    
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: 15,
+    right: 20,
   },
   profileImage: {
-    width: 50,
-    height: 50,
+    width: 46,
+    height: 46,
     borderRadius: 100, 
+    borderWidth: 2.25,
+    borderColor: "black",
   }
 });
 
