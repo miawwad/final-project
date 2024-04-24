@@ -39,6 +39,17 @@ const MainScreen = ({ navigation }) => {
       style={styles.scrollView}
       contentContainerStyle={styles.container}
     >
+        <TouchableOpacity
+        style={styles.profileImageContainer}
+          onPress={() => {
+            navigation.navigate("ProfilePage");
+          }}
+        >
+          <Image
+            source={require("./kacem.jpg")}
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
       <Text style={styles.title}>ChallengeMe</Text>
       <Image
         style={styles.image}
@@ -71,19 +82,20 @@ const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   scrollView: {
+    display: "flex",
+    flexDirection: "column",
     flex: 1,
     backgroundColor: "#F5FCFF",
   },
   container: {
     alignItems: "center",
-    paddingTop: 50, // Increased padding at the top
+    paddingTop: 26, // Increased padding at the top
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
-    marginTop: 20,
-    marginBottom: 20,
+    
   },
   image: {
     width: width - 40,
@@ -115,6 +127,18 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
+  profileImageContainer: {    
+    position: "absolute",
+    top: 15,
+    right: 20,
+  },
+  profileImage: {
+    width: 46,
+    height: 46,
+    borderRadius: 100, 
+    borderWidth: 2.25,
+    borderColor: "black",
+  }
 });
 
 export default MainScreen;

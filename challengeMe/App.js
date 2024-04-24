@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import LoginPage from "./login.js";
 import MainScreen from "./mainPage.js";
 import SignUpPage from "./SignUp.js";
+import ProfilePage from "./ProfilePage.js";
 import HistoryCat from "./HistoryCat.js";
 import GeographyCat from "./GeographyCat.js";
 import MusicCat from "./MusicCat.js";
@@ -34,6 +35,11 @@ export default function App() {
           name="SignUpPage"
           component={SignUpPage}
           options={{ title: "Sign Up" }}
+        />
+        <Stack.Screen
+          name="ProfilePage"
+          component={ProfilePage}
+          options={{ title: "Profile Page" }}
         />
         <Stack.Screen
           name="HistoryCat"
