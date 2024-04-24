@@ -22,14 +22,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
-        name="LoginPage" 
-        component={LoginPage} 
-        />
+        <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen
           name="MainScreen"
           component={MainScreen}
-          options={{ title: "Change Category" }}
+          options={{ title: "Main" }}
         />
         <Stack.Screen
           name="SignUpPage"

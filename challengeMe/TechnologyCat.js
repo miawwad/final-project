@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import Users from "./Users.json";
+
 const APP_STORAGE_KEY = "TechnologyQuizData";
 
 const questions = [
@@ -203,6 +205,7 @@ const TechnologyCat = () => {
     setSelectedAnswer(index);
     const isCorrect = index === quizData[currentQuestion].answer;
     setScore(score + (isCorrect ? 1 : 0));
+    Users.TechnologyHighestScore += isCorrect ? 1 : 0; // Update the Score after each question
     setTimeout(() => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
@@ -215,6 +218,7 @@ const TechnologyCat = () => {
       if (dataString) {
         const data = JSON.parse(dataString);
         setQuizData(data);
+        Users.TechnologyHighestScore = 0; // Reset Score to Zero
       }
     } catch (error) {
       console.error("Error loading quiz data:", error);
@@ -248,6 +252,7 @@ const TechnologyCat = () => {
               setCurrentQuestion(0);
               setScore(0);
               setSelectedAnswer(null);
+              Users.TechnologyHighestScore = 0; // Reset Score to Zero
             }}
           >
             <Text style={styles.homeButtonText}>Restart Quiz</Text>

@@ -20,6 +20,8 @@ import TechnologyCat from "./TechnologyCat.js";
 import SportsCat from "./SportsCat.js";
 import LiteratureCat from "./LiteratureCat.js";
 
+import Users from "./Users.json";
+
 const categoryIcons = {
   History: "book",
   Geography: "globe",
@@ -39,22 +41,19 @@ const MainScreen = ({ navigation }) => {
       style={styles.scrollView}
       contentContainerStyle={styles.container}
     >
-        <TouchableOpacity
+      <TouchableOpacity
         style={styles.profileImageContainer}
-          onPress={() => {
-            navigation.navigate("ProfilePage");
-          }}
-        >
-          <Image
-            source={require("./kacem.jpg")}
-            style={styles.profileImage}
-          />
-        </TouchableOpacity>
-      <Text style={styles.title}>ChallengeMe</Text>
-      <Image
-        style={styles.image}
-        //source={{ uri: "https://source.unsplash.com/random/800x600?q=quiz" }}
-      />
+        onPress={() => {
+          navigation.navigate("ProfilePage");
+        }}
+      >
+        <Image
+          source={require("./TeamPhoto.jpeg")}
+          style={styles.profileImage}
+        />
+      </TouchableOpacity>
+      <Text style={styles.title}>Welcome!</Text>
+      <Image style={styles.image} source={require("./ProjectPhoto.jpeg")} />
       {categories.map((category, index) => (
         <TouchableOpacity
           key={index}
@@ -95,13 +94,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "#333",
-    
   },
   image: {
-    width: width - 40,
-    height: 200,
+    width: width - 150,
+    height: 300,
     borderRadius: 10,
     marginBottom: 20,
+    marginTop: 25,
   },
   button: {
     flexDirection: "row",
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
-  profileImageContainer: {    
+  profileImageContainer: {
     position: "absolute",
     top: 15,
     right: 20,
@@ -135,10 +134,10 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 46,
     height: 46,
-    borderRadius: 100, 
+    borderRadius: 100,
     borderWidth: 2.25,
     borderColor: "black",
-  }
+  },
 });
 
 export default MainScreen;

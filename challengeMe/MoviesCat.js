@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import Users from "./Users.json";
+
 const APP_STORAGE_KEY = "MoviesQuizData";
 
 const questions = [
@@ -226,12 +228,13 @@ const MoviesCat = () => {
 
   useEffect(() => {
     saveQuizData();
-  }, [quizData]);  // This useEffect calls saveQuizData whenever quizData changes
+  }, [quizData]); // This useEffect calls saveQuizData whenever quizData changes
 
   const handleOptionSelect = (index) => {
     setSelectedAnswer(index);
     const isCorrect = index === quizData[currentQuestion].answer;
     setScore(score + (isCorrect ? 1 : 0));
+    Users.MoviesHighestScore += isCorrect ? 1 : 0; // Update the Score after each question
     setTimeout(() => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
@@ -244,6 +247,7 @@ const MoviesCat = () => {
       if (dataString) {
         const data = JSON.parse(dataString);
         setQuizData(data);
+        Users.MoviesHighestScore = 0; // Reset Score to Zero
       }
     } catch (error) {
       console.error("Error loading quiz data:", error);
@@ -266,16 +270,20 @@ const MoviesCat = () => {
       {isQuizFinished ? (
         <View style={styles.resultsContainer}>
           <Text style={styles.feedbackText}>
-            {(score < 10) ? "Try again To Imporve!" : "Good Job!"}
+            {score < 10 ? "Try again To Imporve!" : "Good Job!"}
           </Text>
           <Text style={styles.scoreText}>
             Your Score is {score} / {quizData.length}
           </Text>
-          <TouchableOpacity style={styles.homeButton} onPress={() => {
-            setCurrentQuestion(0);
-            setScore(0);
-            setSelectedAnswer(null);
-          }}>
+          <TouchableOpacity
+            style={styles.homeButton}
+            onPress={() => {
+              setCurrentQuestion(0);
+              setScore(0);
+              setSelectedAnswer(null);
+              Users.MoviesHighestScore = 0; // Reset Score to Zero
+            }}
+          >
             <Text style={styles.homeButtonText}>Restart Quiz</Text>
           </TouchableOpacity>
         </View>
@@ -319,7 +327,7 @@ const styles = StyleSheet.create({
   resultsContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%"
+    width: "100%",
   },
   quizContainer: {
     width: "100%",
@@ -341,7 +349,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#333",
     textAlign: "center",
-    marginTop: 20
+    marginTop: 20,
   },
   optionButton: {
     marginVertical: 10,
