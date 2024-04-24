@@ -39,6 +39,17 @@ const MainScreen = ({ navigation }) => {
       style={styles.scrollView}
       contentContainerStyle={styles.container}
     >
+        <TouchableOpacity
+        style={styles.profileImageContainer}
+          onPress={() => {
+            navigation.navigate("ProfilePage");
+          }}
+        >
+          <Image
+            source={require("./kacem.jpg")}
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
       <Text style={styles.title}>ChallengeMe</Text>
       <Image
         style={styles.image}
@@ -115,6 +126,16 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
+  profileImageContainer: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 100, 
+  }
 });
 
 export default MainScreen;
